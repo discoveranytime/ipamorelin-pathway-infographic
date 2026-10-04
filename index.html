@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#07101f" />
+  <link rel="icon" href="data:," />
+  <title>Ipamorelin → GH pulse</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #07111d;
+      --surface: #0c1929;
+      --surface-2: #13253a;
+      --ink: #f6fbff;
+      --muted: #bed1e1;
+      --line: #36516a;
+      --cyan: #35e0ec;
+      --cyan-soft: #083944;
+      --lime: #cdf46f;
+      --lime-soft: #2c431f;
+      --coral: #ff7e70;
+      --coral-soft: #472321;
+      --amber: #ffca65;
+      --amber-soft: #44341a;
+      --pulse: #6eafff;
+      --pulse-soft: #14335c;
+      --shadow: 0 22px 60px rgba(0, 0, 0, .38);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 10px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #050b14;
+        --surface: #0b1524;
+        --surface-2: #111f31;
+        --ink: #f2f8ff;
+        --muted: #a8bfd3;
+        --line: #29445a;
+        --cyan: #42e4ee;
+        --cyan-soft: #082f3a;
+        --lime: #c6f36a;
+        --lime-soft: #243c1d;
+        --coral: #ff7b68;
+        --coral-soft: #442222;
+        --amber: #ffc45a;
+        --amber-soft: #3c2f16;
+        --pulse: #65a6ff;
+        --pulse-soft: #122c54;
+        --shadow: 0 26px 72px rgba(0, 0, 0, .34);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 8% 3%, color-mix(in srgb, var(--cyan) 13%, transparent), transparent 26rem),
+        radial-gradient(circle at 94% 22%, color-mix(in srgb, var(--lime) 10%, transparent), transparent 24rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    button, a { font: inherit; }
+    a { color: var(--pulse); text-underline-offset: 3px; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+    .page {
+      width: min(1180px, calc(100% - 34px));
+      margin: 0 auto;
+      padding: 42px 0 64px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(260px, .58fr);
+      gap: 46px;
+      align-items: end;
+      margin: 10px 0 34px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 8px 12px 8px 9px;
+      border: 1px solid color-mix(in srgb, var(--coral) 55%, var(--line));
+      border-radius: 999px;
+      background: var(--coral-soft);
+      color: color-mix(in srgb, var(--coral) 85%, var(--ink));
+      font: 700 .78rem/1.15 "SFMono-Regular", Consolas, monospace;
+      letter-spacing: .02em;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--coral) 20%, transparent);
+    }
+
+    h1 {
+      margin: 18px 0 15px;
+      max-width: 780px;
+      font-family: "Aptos Display", "Segoe UI", sans-serif;
+      font-size: clamp(2.65rem, 7vw, 5.9rem);
+      line-height: .93;
+      letter-spacing: -.065em;
+      font-weight: 800;
+    }
+
+    h1 .arrow { color: var(--cyan); font-weight: 500; }
+    h1 .pulse-word { color: var(--pulse); }
+
+    .dek {
+      max-width: 670px;
+      margin: 0;
+      font-size: clamp(1.03rem, 2vw, 1.28rem);
+      color: var(--muted);
+    }
+
+    .quick-read {
+      padding: 19px 0 6px 22px;
+      border-left: 2px solid var(--cyan);
+    }
+    .quick-read strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.02rem;
+    }
+    .quick-read p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .explainer {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: clip;
+    }
+
+    .step-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .step-tab {
+      appearance: none;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      min-width: 0;
+      padding: 15px 10px 13px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: 700;
+      font-size: .8rem;
+      transition: color .2s ease, background .2s ease;
+    }
+    .step-tab:last-child { border-right: 0; }
+    .step-tab span {
+      display: block;
+      width: 27px;
+      height: 27px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      margin: 0 auto 7px;
+      font: 700 .75rem/25px "SFMono-Regular", Consolas, monospace;
+      color: var(--ink);
+      background: var(--surface);
+    }
+    .step-tab[aria-selected="true"] {
+      color: var(--ink);
+      background: var(--surface);
+      box-shadow: inset 0 -4px 0 var(--cyan);
+    }
+    .step-tab[aria-selected="true"] span {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #001b20;
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(270px, .75fr);
+      min-height: 492px;
+    }
+
+    .diagram {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, transparent 0 37%, color-mix(in srgb, var(--cyan) 5%, transparent) 37% 100%),
+        radial-gradient(circle at 18% 47%, color-mix(in srgb, var(--cyan) 12%, transparent), transparent 26%);
+      border-right: 1px solid var(--line);
+    }
+
+    .diagram svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 492px;
+    }
+
+    .zone-label {
+      position: absolute;
+      z-index: 2;
+      top: 18px;
+      font: 700 .69rem/1 "SFMono-Regular", Consolas, monospace;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .zone-label.outside { left: 22px; }
+    .zone-label.inside { left: 42%; }
+
+    .info-panel {
+      padding: 34px 30px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--surface);
+    }
+
+    .step-kicker {
+      color: var(--cyan);
+      font: 700 .76rem/1.2 "SFMono-Regular", Consolas, monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 13px;
+    }
+
+    .info-panel h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
+    .info-panel p { margin: 0; color: var(--muted); font-size: 1rem; }
+
+    .translation {
+      margin-top: 22px;
+      padding: 15px 16px;
+      background: var(--cyan-soft);
+      border-radius: var(--radius-sm);
+      color: color-mix(in srgb, var(--cyan) 70%, var(--ink));
+      font-size: .9rem;
+    }
+    .translation strong { display: block; color: var(--ink); margin-bottom: 3px; }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    .next-btn {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: var(--ink);
+      color: var(--surface);
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .counter { color: var(--muted); font: 700 .75rem/1 "SFMono-Regular", Consolas, monospace; }
+
+    .path-element { transition: opacity .28s ease, filter .28s ease; }
+    .diagram svg text {
+      paint-order: stroke fill;
+      stroke: var(--surface);
+      stroke-width: 1.8px;
+      stroke-linejoin: round;
+    }
+    .diagram[data-step="1"] .path-element:not([data-at="1"]),
+    .diagram[data-step="2"] .path-element:not([data-at="2"]),
+    .diagram[data-step="3"] .path-element:not([data-at="3"]),
+    .diagram[data-step="4"] .path-element:not([data-at="4"]),
+    .diagram[data-step="5"] .path-element:not([data-at="5"]) { opacity: .72; filter: saturate(.82); }
+    .diagram:not([data-step="5"]) [data-at="5"] { display: none; }
+    .diagram[data-step="1"] [data-at="1"],
+    .diagram[data-step="2"] [data-at="2"],
+    .diagram[data-step="3"] [data-at="3"],
+    .diagram[data-step="4"] [data-at="4"],
+    .diagram[data-step="5"] [data-at="5"] { opacity: 1; filter: drop-shadow(0 0 9px color-mix(in srgb, var(--cyan) 55%, transparent)); }
+
+    .signal-dot { animation: travel 5s linear infinite; }
+    .ca-dot { animation: flicker 1.5s ease-in-out infinite alternate; }
+    .gh-dot { animation: pulseOut 2.2s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+
+    @keyframes travel { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+    @keyframes flicker { from { opacity: .35; } to { opacity: 1; } }
+    @keyframes pulseOut { 0% { transform: scale(.65); opacity: 0; } 35% { opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
+
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .pulse-card, .context-card {
+      padding: 25px 26px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .pulse-card { border-radius: var(--radius-md) 8px var(--radius-md) var(--radius-md); }
+    .context-card { border-radius: 8px var(--radius-md) var(--radius-md) var(--radius-md); }
+    .pulse-card h3, .context-card h3 { margin: 0 0 8px; font-size: 1.12rem; }
+    .pulse-card p, .context-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .pulse-strip {
+      display: grid;
+      grid-template-columns: 1fr 1.65fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .mini-chart { width: 100%; height: 78px; overflow: visible; }
+    .mini-chart .baseline { stroke: var(--line); stroke-width: 2; }
+    .mini-chart .wave { stroke: var(--pulse); stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .mini-chart text { fill: var(--muted); font: 10px "SFMono-Regular", Consolas, monospace; }
+
+    .limits {
+      margin-top: 22px;
+      padding: 28px;
+      border-radius: 8px 24px 24px 24px;
+      background: var(--surface-2);
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .limits h3 { margin: 0; font-size: 1.25rem; line-height: 1.2; }
+    .limits ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+    .limits li { position: relative; padding-left: 21px; color: var(--muted); }
+    .limits li::before { content: ""; position: absolute; left: 0; top: .65em; width: 9px; height: 2px; background: var(--coral); }
+
+    footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+      padding: 28px 4px 0;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    footer p { margin: 0; max-width: 690px; }
+    .sources { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+
+    @media (max-width: 840px) {
+      .page { width: min(100% - 24px, 720px); padding-top: 24px; }
+      .intro { grid-template-columns: 1fr; gap: 20px; }
+      .quick-read { padding: 13px 0 3px 16px; }
+      h1 { font-size: clamp(2.75rem, 13vw, 4.7rem); }
+      .step-tabs { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .step-tab { font-size: 0; padding: 12px 4px 10px; }
+      .step-tab span { margin-bottom: 0; }
+      .stage { grid-template-columns: 1fr; min-height: 0; }
+      .diagram { border-right: 0; border-bottom: 1px solid var(--line); }
+      .diagram svg { min-height: 385px; height: 385px; }
+      .info-panel { padding: 25px 22px 22px; min-height: 315px; }
+      .takeaway-grid { grid-template-columns: 1fr; }
+      .pulse-strip { grid-template-columns: 1fr; }
+      .limits { grid-template-columns: 1fr; gap: 16px; padding: 23px; }
+      footer { grid-template-columns: 1fr; }
+      .sources { justify-content: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .explainer { border-radius: 20px; }
+      .diagram svg { min-height: 340px; height: 340px; }
+      .diagram svg text { font-size: 18px !important; stroke-width: 3px; }
+      .zone-label { top: 14px; font-size: .6rem; }
+      .info-panel { min-height: 350px; }
+      .pulse-card, .context-card { padding: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <div class="status"><span class="status-dot" aria-hidden="true"></span> Investigational · not FDA-approved</div>
+        <h1 id="page-title">Ipamorelin <span class="arrow">→</span> a <span class="pulse-word">GH pulse</span></h1>
+        <p class="dek">A simplified molecular tour through a pituitary <strong>somatotroph</strong>—the cell that stores and releases growth hormone.</p>
+      </div>
+      <aside class="quick-read" aria-label="Quick summary">
+        <strong>The short version</strong>
+        <p>Receptor activation starts a calcium signal. Calcium helps GH-filled vesicles fuse with the cell membrane and release their contents.</p>
+      </aside>
+    </section>
+
+    <section class="explainer" aria-label="Interactive five-step pathway">
+      <div class="step-tabs" role="tablist" aria-label="Pathway steps">
+        <button class="step-tab" role="tab" aria-selected="true" data-step="1"><span>01</span>Approach</button>
+        <button class="step-tab" role="tab" aria-selected="false" data-step="2"><span>02</span>Dock</button>
+        <button class="step-tab" role="tab" aria-selected="false" data-step="3"><span>03</span>Relay</button>
+        <button class="step-tab" role="tab" aria-selected="false" data-step="4"><span>04</span>Calcium</button>
+        <button class="step-tab" role="tab" aria-selected="false" data-step="5"><span>05</span>Release</button>
+      </div>
+
+      <div class="stage">
+        <div class="diagram" data-step="1" aria-label="Animated schematic of Ipamorelin activating GHS-R1a signaling in a pituitary cell">
+          <span class="zone-label outside">Outside cell</span>
+          <span class="zone-label inside">Inside somatotroph</span>
+          <svg viewBox="0 0 760 500" role="img" aria-labelledby="diagram-title diagram-desc">
+            <title id="diagram-title">Ipamorelin to growth hormone pulse signaling pathway</title>
+            <desc id="diagram-desc">Ipamorelin approaches and binds the GHS-R1a receptor. Gq activates phospholipase C, producing IP3 and DAG. IP3 releases calcium inside the pituitary cell. Growth hormone vesicles fuse with the membrane and release growth hormone.</desc>
+            <defs>
+              <linearGradient id="membrane" x1="0" x2="1">
+                <stop offset="0" stop-color="var(--cyan)" stop-opacity=".35" />
+                <stop offset="1" stop-color="var(--cyan)" stop-opacity=".9" />
+              </linearGradient>
+              <linearGradient id="ghgrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="var(--pulse)" />
+                <stop offset="1" stop-color="var(--cyan)" />
+              </linearGradient>
+              <filter id="softGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+
+            <!-- membrane -->
+            <g opacity=".78">
+              <rect x="275" y="0" width="22" height="500" fill="url(#membrane)" />
+              <path d="M283 0V500" stroke="var(--cyan)" stroke-width="2" stroke-dasharray="4 9" />
+              <g fill="var(--cyan)" opacity=".5">
+                <circle cx="283" cy="55" r="4"/><circle cx="283" cy="94" r="4"/><circle cx="283" cy="343" r="4"/><circle cx="283" cy="384" r="4"/><circle cx="283" cy="430" r="4"/>
+              </g>
+            </g>
+
+            <!-- ipamorelin -->
+            <g class="path-element" data-at="1">
+              <path d="M34 168 C94 110, 158 112, 236 179" stroke="var(--cyan)" stroke-width="2" stroke-dasharray="5 8" fill="none" opacity=".6" />
+              <g transform="translate(90 150)" filter="url(#softGlow)">
+                <path d="M0 0L24 -17L49 0L74 -17L99 0" fill="none" stroke="var(--cyan)" stroke-width="5" stroke-linecap="round" />
+                <circle cx="0" cy="0" r="11" fill="var(--cyan)"/><circle cx="24" cy="-17" r="11" fill="var(--lime)"/><circle cx="49" cy="0" r="11" fill="var(--amber)"/><circle cx="74" cy="-17" r="11" fill="var(--coral)"/><circle cx="99" cy="0" r="11" fill="var(--pulse)"/>
+                <text x="50" y="30" text-anchor="middle" fill="var(--ink)" font-size="14" font-weight="800">IPAMORELIN</text>
+                <text x="50" y="48" text-anchor="middle" fill="var(--muted)" font-size="15" font-weight="700">synthetic pentapeptide</text>
+              </g>
+            </g>
+
+            <!-- receptor -->
+            <g class="path-element" data-at="2">
+              <g transform="translate(238 136)">
+                <path d="M28 0 C-5 16, 57 38, 23 59 C-8 79, 56 101, 24 123 C-4 142, 52 164, 20 188" fill="none" stroke="var(--coral)" stroke-width="14" stroke-linecap="round"/>
+                <path d="M48 0 C16 18, 75 40, 43 62 C12 81, 73 102, 40 124 C12 143, 71 163, 39 188" fill="none" stroke="var(--amber)" stroke-width="6" stroke-linecap="round" opacity=".95"/>
+              </g>
+              <circle cx="259" cy="177" r="13" fill="var(--cyan)" stroke="var(--surface)" stroke-width="4"/>
+              <path d="M190 150 C220 152, 234 162, 248 173" stroke="var(--cyan)" stroke-width="3" fill="none" marker-end="url(#none)"/>
+              <text x="206" y="348" text-anchor="middle" fill="var(--ink)" font-size="15" font-weight="800">GHS-R1a</text>
+              <text x="206" y="367" text-anchor="middle" fill="var(--ink)" font-size="15" font-weight="700">ghrelin receptor</text>
+            </g>
+
+            <!-- Gq and PLC -->
+            <g class="path-element" data-at="3">
+              <path d="M307 264 C342 264, 350 290, 376 295" stroke="var(--lime)" stroke-width="3" fill="none" stroke-dasharray="6 6"/>
+              <circle cx="350" cy="265" r="27" fill="var(--lime-soft)" stroke="var(--lime)" stroke-width="3"/>
+              <text x="350" y="271" text-anchor="middle" fill="var(--ink)" font-size="17" font-weight="800">Gq</text>
+              <rect x="380" y="267" width="70" height="52" rx="15" fill="var(--amber-soft)" stroke="var(--amber)" stroke-width="3"/>
+              <text x="415" y="298" text-anchor="middle" fill="var(--ink)" font-size="16" font-weight="800">PLC</text>
+              <path d="M451 293H505" stroke="var(--amber)" stroke-width="3"/>
+              <g transform="translate(515 265)">
+                <rect x="0" y="0" width="66" height="34" rx="17" fill="var(--cyan-soft)" stroke="var(--cyan)" stroke-width="2"/>
+                <text x="33" y="22" text-anchor="middle" fill="var(--ink)" font-size="13" font-weight="800">IP₃</text>
+                <rect x="0" y="45" width="66" height="34" rx="17" fill="var(--coral-soft)" stroke="var(--coral)" stroke-width="2"/>
+                <text x="33" y="67" text-anchor="middle" fill="var(--ink)" font-size="13" font-weight="800">DAG</text>
+              </g>
+              <text x="416" y="340" text-anchor="middle" fill="var(--ink)" font-size="15" font-weight="700">intracellular relay</text>
+            </g>
+
+            <!-- ER and calcium -->
+            <g class="path-element" data-at="4">
+              <path d="M365 406 C432 366, 522 391, 604 364 C650 350, 692 362, 727 344" stroke="var(--cyan)" stroke-width="18" opacity=".2" fill="none" stroke-linecap="round"/>
+              <path d="M365 406 C432 366, 522 391, 604 364 C650 350, 692 362, 727 344" stroke="var(--cyan)" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <text x="585" y="424" text-anchor="middle" fill="var(--ink)" font-size="15" font-weight="700">Ca²⁺ store</text>
+              <path d="M548 306 C535 329, 537 350, 555 371" stroke="var(--cyan)" stroke-width="3" fill="none" stroke-dasharray="5 5"/>
+              <g fill="var(--cyan)" filter="url(#softGlow)">
+                <circle class="ca-dot" cx="504" cy="350" r="7"/><circle class="ca-dot" cx="538" cy="337" r="6" style="animation-delay:.3s"/><circle class="ca-dot" cx="574" cy="326" r="8" style="animation-delay:.6s"/>
+                <circle class="ca-dot" cx="610" cy="313" r="6" style="animation-delay:.9s"/><circle class="ca-dot" cx="650" cy="298" r="7" style="animation-delay:1.2s"/>
+              </g>
+              <text x="620" y="277" text-anchor="middle" fill="var(--ink)" font-size="15" font-weight="800">Ca²⁺ rises</text>
+            </g>
+
+            <!-- GH vesicles and release -->
+            <g class="path-element" data-at="5">
+              <g transform="translate(397 118)">
+                <circle cx="65" cy="55" r="43" fill="var(--pulse-soft)" stroke="var(--pulse)" stroke-width="3"/>
+                <circle cx="54" cy="49" r="10" fill="url(#ghgrad)"/><circle cx="77" cy="62" r="9" fill="url(#ghgrad)"/><circle cx="72" cy="38" r="7" fill="url(#ghgrad)"/>
+                <text x="65" y="116" text-anchor="middle" fill="var(--muted)" font-size="11">GH vesicle</text>
+              </g>
+              <path d="M416 172 C375 175, 341 177, 299 183" stroke="var(--pulse)" stroke-width="3" fill="none" stroke-dasharray="7 6"/>
+              <g fill="var(--pulse)" filter="url(#softGlow)">
+                <circle class="gh-dot" cx="252" cy="94" r="10"/><circle class="gh-dot" cx="215" cy="72" r="8" style="animation-delay:.35s"/><circle class="gh-dot" cx="172" cy="87" r="11" style="animation-delay:.7s"/>
+                <circle class="gh-dot" cx="130" cy="62" r="8" style="animation-delay:1.05s"/>
+              </g>
+              <path d="M270 128 C230 120, 177 130, 119 105" stroke="var(--pulse)" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <text x="169" y="35" text-anchor="middle" fill="var(--pulse)" font-size="15" font-weight="800">GH exits in a pulse</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="info-panel" aria-live="polite">
+          <div>
+            <div class="step-kicker" id="step-kicker">Step 1 · Approach</div>
+            <h2 id="step-title">A five–amino acid signal arrives</h2>
+            <p id="step-copy">Ipamorelin is a synthetic pentapeptide. In this simplified view, it reaches a growth-hormone-producing cell in the anterior pituitary.</p>
+            <div class="translation" id="translation"><strong>Plain English</strong>Think of it as a molecular key approaching a specific lock.</div>
+          </div>
+          <div class="controls">
+            <button class="next-btn" id="next-btn" type="button">Next signal →</button>
+            <span class="counter" id="counter">01 / 05</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="takeaway-grid" aria-label="Key takeaways">
+      <article class="pulse-card">
+        <div class="pulse-strip">
+          <div>
+            <h3>A pulse—not a faucet</h3>
+            <p>The diagram ends with a brief release event. Normal GH physiology is episodic and shaped by other signals and feedback loops.</p>
+          </div>
+          <svg class="mini-chart" viewBox="0 0 300 78" role="img" aria-label="Illustrative curve showing a short growth hormone pulse rather than a continuous rise">
+            <line class="baseline" x1="4" y1="60" x2="296" y2="60" />
+            <path class="wave" d="M4 60 C64 60 84 61 102 56 C120 51 128 10 150 10 C173 10 182 50 201 56 C218 61 253 60 296 60" />
+            <text x="5" y="75">time →</text>
+          </svg>
+        </div>
+      </article>
+      <article class="context-card">
+        <h3>Where this happens</h3>
+        <p>The highlighted route is inside a <strong>somatotroph</strong> in the anterior pituitary. GHS-R1a is also involved in broader hypothalamic–pituitary signaling; the biology is more connected than one cell alone.</p>
+      </article>
+    </section>
+
+    <section class="limits" aria-labelledby="limits-title">
+      <h3 id="limits-title">What this diagram does <em>not</em> claim</h3>
+      <ul>
+        <li>It does not predict a person’s response, outcome, safety, or GH level.</li>
+        <li>It omits regulatory inputs such as GHRH, somatostatin, sleep, nutrition, and negative feedback.</li>
+        <li>It is a mechanism explainer—not dosing guidance or a recommendation to use Ipamorelin.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p><strong>Educational only.</strong> Ipamorelin is investigational and is not FDA-approved. The pathway is intentionally simplified; intracellular signaling can vary by cell context and experimental model.</p>
+      <div class="sources" aria-label="Sources">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/9849822/" target="_blank" rel="noreferrer">Ipamorelin research</a>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4190751/" target="_blank" rel="noreferrer">Ghrelin–GH signaling review</a>
+        <a href="https://www.mdpi.com/1422-0067/15/3/4837" target="_blank" rel="noreferrer">GHS-R1a signaling review</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var steps = [
+        {
+          kicker: "Step 1 · Approach",
+          title: "A five–amino acid signal arrives",
+          copy: "Ipamorelin is a synthetic pentapeptide. In this simplified view, it reaches a growth-hormone-producing cell in the anterior pituitary.",
+          plain: "Think of it as a molecular key approaching a specific lock."
+        },
+        {
+          kicker: "Step 2 · Dock",
+          title: "It activates the ghrelin receptor",
+          copy: "Ipamorelin acts as an agonist at GHS-R1a, the growth hormone secretagogue (ghrelin) receptor. This receptor crosses the cell membrane seven times.",
+          plain: "The key fits; the receptor changes shape and passes the message inward."
+        },
+        {
+          kicker: "Step 3 · Relay",
+          title: "Gq turns on the signal relay",
+          copy: "Activated GHS-R1a couples mainly to Gq/11. That engages phospholipase C (PLC), which generates the second messengers IP₃ and DAG.",
+          plain: "One signal outside becomes several fast-moving signals inside."
+        },
+        {
+          kicker: "Step 4 · Calcium",
+          title: "IP₃ helps raise calcium inside the cell",
+          copy: "IP₃ opens calcium-release channels on intracellular stores. The resulting rise in cytosolic Ca²⁺ is a key trigger for secretion.",
+          plain: "Calcium is the cell’s ‘release now’ cue."
+        },
+        {
+          kicker: "Step 5 · Release",
+          title: "GH vesicles fuse and release",
+          copy: "The calcium signal promotes fusion of growth-hormone-containing vesicles with the cell membrane. Stored GH exits the somatotroph as a pulse.",
+          plain: "Pre-packed hormone is released in a burst—not produced from scratch in that instant."
+        }
+      ];
+      var active = 0;
+      var tabs = Array.prototype.slice.call(document.querySelectorAll(".step-tab"));
+      var diagram = document.querySelector(".diagram");
+      var kicker = document.getElementById("step-kicker");
+      var title = document.getElementById("step-title");
+      var copy = document.getElementById("step-copy");
+      var translation = document.getElementById("translation");
+      var counter = document.getElementById("counter");
+      var next = document.getElementById("next-btn");
+
+      function render(index) {
+        active = index;
+        var data = steps[index];
+        tabs.forEach(function (tab, i) {
+          tab.setAttribute("aria-selected", i === index ? "true" : "false");
+          tab.tabIndex = i === index ? 0 : -1;
+        });
+        diagram.setAttribute("data-step", String(index + 1));
+        kicker.textContent = data.kicker;
+        title.textContent = data.title;
+        copy.textContent = data.copy;
+        translation.innerHTML = "<strong>Plain English</strong>" + data.plain;
+        counter.textContent = "0" + (index + 1) + " / 05";
+        next.textContent = index === steps.length - 1 ? "Replay pathway ↻" : "Next signal →";
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener("click", function () { render(index); });
+        tab.addEventListener("keydown", function (event) {
+          if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+            event.preventDefault();
+            var shift = event.key === "ArrowRight" ? 1 : -1;
+            var target = (index + shift + tabs.length) % tabs.length;
+            render(target);
+            tabs[target].focus();
+          }
+        });
+      });
+      next.addEventListener("click", function () { render((active + 1) % steps.length); });
+      render(0);
+    }());
+  </script>
+</body>
+</html>
