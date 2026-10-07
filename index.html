@@ -4,28 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#07101f" />
+  <meta name="theme-color" content="#1f0714" />
   <link rel="icon" href="data:," />
   <title>Ipamorelin → GH pulse</title>
   <style>
     :root {
       color-scheme: light dark;
-      --bg: #07111d;
-      --surface: #0c1929;
-      --surface-2: #13253a;
-      --ink: #f6fbff;
-      --muted: #bed1e1;
-      --line: #36516a;
-      --cyan: #35e0ec;
-      --cyan-soft: #083944;
-      --lime: #cdf46f;
-      --lime-soft: #2c431f;
-      --coral: #ff7e70;
-      --coral-soft: #472321;
-      --amber: #ffca65;
-      --amber-soft: #44341a;
-      --pulse: #6eafff;
-      --pulse-soft: #14335c;
+      --bg: #1d0713;
+      --surface: #290c1b;
+      --surface-2: #3a1327;
+      --ink: #fff5fa;
+      --muted: #e1bed0;
+      --line: #6a3651;
+      --cyan:#f472b6;
+      --cyan-soft: #440827;
+      --lime:#a3e635;
+      --lime-soft: #35431f;
+      --coral:#818cf8;
+      --coral-soft: #212547;
+      --amber:#4ade80;
+      --amber-soft: #1a4429;
+      --pulse:#f472b6;
+      --pulse-soft: #5c143a;
       --shadow: 0 22px 60px rgba(0, 0, 0, .38);
       --radius-lg: 28px;
       --radius-md: 18px;
@@ -34,22 +34,22 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #050b14;
-        --surface: #0b1524;
-        --surface-2: #111f31;
-        --ink: #f2f8ff;
-        --muted: #a8bfd3;
-        --line: #29445a;
-        --cyan: #42e4ee;
-        --cyan-soft: #082f3a;
-        --lime: #c6f36a;
-        --lime-soft: #243c1d;
-        --coral: #ff7b68;
-        --coral-soft: #442222;
-        --amber: #ffc45a;
-        --amber-soft: #3c2f16;
-        --pulse: #65a6ff;
-        --pulse-soft: #122c54;
+        --bg: #14050d;
+        --surface: #240b18;
+        --surface-2: #311122;
+        --ink: #fff2f9;
+        --muted: #d3a8be;
+        --line: #5a2943;
+        --cyan: #ee429c;
+        --cyan-soft: #3a0822;
+        --lime: #bff36a;
+        --lime-soft: #303c1d;
+        --coral: #6c79fb;
+        --coral-soft: #222544;
+        --amber: #5efb97;
+        --amber-soft: #163c24;
+        --pulse: #fb69b5;
+        --pulse-soft: #541235;
         --shadow: 0 26px 72px rgba(0, 0, 0, .34);
       }
     }
@@ -189,7 +189,7 @@
     .step-tab[aria-selected="true"] span {
       background: var(--cyan);
       border-color: var(--cyan);
-      color: #001b20;
+      color: #1f0111;
     }
 
     .stage {
@@ -350,6 +350,34 @@
     .limits li { position: relative; padding-left: 21px; color: var(--muted); }
     .limits li::before { content: ""; position: absolute; left: 0; top: .65em; width: 9px; height: 2px; background: var(--coral); }
 
+    .tiers { margin-top: 22px; }
+    .tiers > h2 { margin: 0 0 10px; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -.03em; line-height: 1.1; }
+    .tiers > h2 .hl-cyan { color: var(--cyan); }
+    .tiers-lede { margin: 0 0 18px; color: var(--muted); max-width: 760px; font-size: .98rem; }
+    .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .tier { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); position: relative; overflow: hidden; }
+    .tier::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--tb, var(--cyan)); }
+    .tier h3 { margin: 12px 0 8px; font-size: 1.08rem; }
+    .tier ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .tier li { position: relative; padding-left: 18px; color: var(--muted); font-size: .93rem; }
+    .tier li::before { content: "▸"; position: absolute; left: 0; color: var(--tb, var(--cyan)); font-weight: 800; }
+    .tier li strong { color: var(--ink); }
+    .tbadge { display: inline-block; font: 700 .68rem/1 "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; padding: 7px 10px; border-radius: 999px; border: 1px solid; }
+    .tbadge.b1 { color: var(--cyan); border-color: color-mix(in srgb, var(--cyan) 55%, var(--line)); background: var(--cyan-soft); }
+    .tbadge.b2 { color: var(--amber); border-color: color-mix(in srgb, var(--amber) 55%, var(--line)); background: var(--amber-soft); }
+    .tbadge.b3 { color: var(--coral); border-color: color-mix(in srgb, var(--coral) 55%, var(--line)); background: var(--coral-soft); }
+    .tier .translation { margin-top: 14px; }
+    .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+    .fit-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); position: relative; overflow: hidden; }
+    .fit-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--fb, var(--lime)); }
+    .fit-card h3 { margin: 0 0 10px; font-size: 1.15rem; }
+    .fit-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .fit-card li { position: relative; padding-left: 18px; color: var(--muted); font-size: .93rem; }
+    .fit-card li::before { content: "▸"; position: absolute; left: 0; color: var(--fb, var(--lime)); font-weight: 800; }
+    .fit-card li strong { color: var(--ink); }
+    .fit-note { margin-top: 18px; padding: 18px 20px; border: 1px dashed var(--line); border-radius: var(--radius-sm); color: var(--muted); font-size: .94rem; background: var(--surface-2); }
+    .fit-note strong { color: var(--ink); }
+
     footer {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -361,6 +389,10 @@
     }
     footer p { margin: 0; max-width: 690px; }
     .sources { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+
+    @media (max-width: 840px) {
+      .tier-grid, .fit-grid { grid-template-columns: 1fr; }
+    }
 
     @media (max-width: 840px) {
       .page { width: min(100% - 24px, 720px); padding-top: 24px; }
@@ -551,6 +583,70 @@
         <h3>Where this happens</h3>
         <p>The highlighted route is inside a <strong>somatotroph</strong> in the anterior pituitary. GHS-R1a is also involved in broader hypothalamic–pituitary signaling; the biology is more connected than one cell alone.</p>
       </article>
+    </section>
+
+    <section class="tiers" aria-labelledby="benefits-title">
+      <h2 id="benefits-title">Potential <span class="hl-cyan">benefits</span> — and what backs each claim</h2>
+      <p class="tiers-lede">Ipamorelin is investigational with no approved indication, so "benefits" here means something careful: what's <strong>established</strong> about what it does, what's <strong>predicted</strong> from that mechanism, and what <strong>forums report</strong>. The lanes are not equal — read them that way.</p>
+      <div class="tier-grid">
+        <article class="tier" style="--tb: var(--cyan)">
+          <span class="tbadge b1">Established · in research</span>
+          <h3>What it does — the pharmacology</h3>
+          <ul>
+            <li><strong>Activates GHS-R1a</strong>, the ghrelin receptor — the established pharmacology this whole diagram shows.</li>
+            <li><strong>Triggers GH release</strong> from pituitary somatotrophs in research settings — that's the pulse in the diagram, not a clinical outcome.</li>
+            <li><strong>Releases GH selectively</strong>, with little effect on other pituitary hormones in research — why scientists call it a "selective" secretagogue.</li>
+            <li>So no <strong>clinical efficacy claim</strong> is established for ipamorelin in humans — only the pharmacology above.</li>
+          </ul>
+          <div class="translation"><strong>Plain English</strong>Think of it this way: this lane describes what the molecule <em>does to a cell</em> — not what it does <em>for a person</em>. Those are different questions.</div>
+        </article>
+        <article class="tier" style="--tb: var(--amber)">
+          <span class="tbadge b2">Predicted · from the mechanism</span>
+          <h3>What the mechanism suggests — untested</h3>
+          <ul>
+            <li><strong>Predicted:</strong> GH pulses influence growth, metabolism, and body composition — so <em>if</em> the mechanism translated, those are the areas researchers would look. Not demonstrated for ipamorelin.</li>
+            <li><strong>Explicit caveat:</strong> no published human efficacy trials. The diagram shows a mechanism, not an outcome.</li>
+            <li>Investigational status means every "benefit" beyond the receptor pharmacology is a hypothesis awaiting its first real test.</li>
+          </ul>
+          <div class="translation"><strong>Plain English</strong>Think of it this way: the diagram shows the dominoes falling — it doesn't show what the last domino builds.</div>
+        </article>
+        <article class="tier" style="--tb: var(--coral)">
+          <span class="tbadge b3">Anecdotes · stories, not data</span>
+          <h3>What forums report</h3>
+          <ul>
+            <li>Recurring paraphrased themes: <strong>sleep quality, recovery, body-composition goals</strong> — often discussed alongside other GH-axis compounds.</li>
+            <li>Stories, not data: <strong>no controls, no verification</strong>, and outcomes like "recovery" are highly placebo-prone.</li>
+            <li>Anecdotes usually involve <strong>multiple compounds at once</strong>, so no story isolates ipamorelin.</li>
+          </ul>
+          <div class="translation"><strong>Plain English</strong>Think of it this way: overhearing that a restaurant is good is not the same as a health inspection. Interesting — but not evidence.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="tiers" aria-labelledby="fit-title">
+      <h2 id="fit-title">Who might this be <span class="hl-cyan">relevant to</span> — and who it isn't for</h2>
+      <p class="tiers-lede">Not everyone reading a mechanism diagram is reading for the same reason. This is general information, not personal medical advice.</p>
+      <div class="fit-grid">
+        <article class="fit-card" style="--fb: var(--lime)">
+          <h3>May be relevant to</h3>
+          <ul>
+            <li><strong>Students of GH physiology</strong> curious how a secretagogue triggers a pulse at the cellular level.</li>
+            <li><strong>Researchers and science readers</strong> tracking investigational GH-axis compounds and their pharmacology.</li>
+            <li><strong>Critical readers</strong> learning to separate what a mechanism diagram shows from what it claims.</li>
+          </ul>
+        </article>
+        <article class="fit-card" style="--fb: var(--coral)">
+          <h3>May not suit — extra caution</h3>
+          <ul>
+            <li><strong>Anyone expecting proven clinical benefits</strong> — ipamorelin has no approved indication and no published human efficacy trials.</li>
+            <li><strong>Tested athletes:</strong> GH secretagogues, including ipamorelin, are prohibited in sport by WADA.</li>
+            <li><strong>People seeking treatment</strong> for a medical condition: this is not a treatment for anything.</li>
+            <li><strong>People who are pregnant or breastfeeding,</strong> or managing serious illness: no safety data exists.</li>
+            <li><strong>Anyone looking for dosing, sourcing, or administration guidance:</strong> this page contains none.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="fit-note"><strong>Established indications: none.</strong> This is a research compound with no approved medical use. Everything on this page is general information — not guidance for any person, and not a substitute for a clinician.</div>
     </section>
 
     <section class="limits" aria-labelledby="limits-title">
